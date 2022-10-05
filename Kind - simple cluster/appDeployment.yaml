@@ -1,23 +1,23 @@
 kind: Pod
 apiVersion: v1
 metadata:
-  name: foo-app
+  name: hello-app
   labels:
-    app: foo
+    app: hello
 spec:
   containers:
-  - name: foo-app
+  - name: hello-app
     image: hashicorp/http-echo:0.2.3
     args:
-    - "-text=foo"
+    - "-text=Welcome!"
 ---
 kind: Service
 apiVersion: v1
 metadata:
-  name: foo-service
+  name: hello-service
 spec:
   selector:
-    app: foo
+    app: hello
   ports:
   # Default port used by the image
   - port: 5678
@@ -25,23 +25,23 @@ spec:
 kind: Pod
 apiVersion: v1
 metadata:
-  name: bar-app
+  name: ping-app
   labels:
-    app: bar
+    app: ping
 spec:
   containers:
-  - name: bar-app
+  - name: ping-app
     image: hashicorp/http-echo:0.2.3
     args:
-    - "-text=bar"
+    - "-text=pong... very funny... ha ha...."
 ---
 kind: Service
 apiVersion: v1
 metadata:
-  name: bar-service
+  name: ping-service
 spec:
   selector:
-    app: bar
+    app: ping
   ports:
   # Default port used by the image
   - port: 5678
@@ -55,17 +55,17 @@ spec:
   - http:
       paths:
       - pathType: Prefix
-        path: "/foo"
+        path: "/hello"
         backend:
           service:
-            name: foo-service
+            name: hello-service
             port:
               number: 5678
       - pathType: Prefix
-        path: "/bar"
+        path: "/ping"
         backend:
           service:
-            name: bar-service
+            name: ping-service
             port:
               number: 5678
 ---
