@@ -19,7 +19,9 @@ Below full list of prerequisites with installation guides:
 ## Cluster setup
 
 Let's create a local Kubernetes cluster with the YAML config file.  
-`kind create cluster --config clusterDeployment.yaml`  
+```
+kind create cluster --config clusterDeployment.yaml
+```  
 
 Next, check the created cluster by quering some general informations.
 - `kind get clusters`  
@@ -49,7 +51,9 @@ Also we [created cluster](https://kind.sigs.k8s.io/docs/user/ingress/#create-clu
 ## Fun finally
 
 Now is the proper time to deploy our application. We will use a simple, easy to use web server from Hashicorp - [HTTP-echo](https://github.com/hashicorp/http-echo).   
-`kubectl apply -f appDeployment.yaml`
+```
+kubectl apply -f appDeployment.yaml
+```
 
 Let's try it!  
 - `curl localhost/hello`  
@@ -61,13 +65,16 @@ Verify resources we've created using `kubectl get` command:
 - `kubectl get services`
 - `kubectl get pods`
 - `kubectl get ingress`
+
 You can try also `kubectl describe \ logs` for moe information.
 
 ## After fun
 
 Delete the cluster and grab a beer!  
 Good job today!    
-`kind delete cluster --name kind`
+```
+kind delete cluster --name kind
+```
 
 # Conclusion
 
