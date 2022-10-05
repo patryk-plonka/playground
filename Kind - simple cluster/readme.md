@@ -1,7 +1,7 @@
 # Overview
 
-When working with Kubernetes, we often lack a tool that helps in local development — a way run local Kubernetes cluster.  
-In a few moments you will dicover a way to do that with kind.  
+When working with Kubernetes, we often lack a tool that helps in local development — a way to run local Kubernetes cluster.  
+In a few moments you will discover a way to do that with Kind.  
 
 [Kind](https://kind.sigs.k8s.io/) is a testing tool for Kubernetes, but can be handy for local development.
 
@@ -23,7 +23,7 @@ Let's create a local Kubernetes cluster with the YAML config file.
 kind create cluster --config clusterDeployment.yaml
 ```  
 
-Next, check the created cluster by quering some general informations.
+Next, check the created cluster by querying some general information.
 - `kind get clusters`  
 - `kubectl cluster-info --context kind-kind`  
 - `docker ps`  
@@ -37,8 +37,8 @@ Kubernetes without Ingress is like a car without doors, noone can access it, so 
 Why we need an ingress controller? Because we want to establish a connection between our local environment and the Kubernetes cluster.
 
 Let's try the [Contour ingress](https://projectcontour.io/resources/philosophy/).  
-You may ask why not something else, but this particular project is under heavy development still so this seems to be the only way how you can satisfy your curiosity.  
-But no pressure, you can use everything you want!  
+You may ask why not something else, but this particular project is still in development so this lab seems to be the only way how you can satisfy your curiosity about it.  
+But no pressure, you can use whatever you want!  
 
 ```
 kubectl apply -f https://projectcontour.io/quickstart/contour.yaml
@@ -46,7 +46,7 @@ kubectl patch daemonsets -n projectcontour envoy --patch-file ingressPatch.yaml
 ```
 As you can see we applied a [kind specific patch](https://kind.sigs.k8s.io/docs/user/ingress/#contour) to allow Envoy pods to run on our single master node for our lab.
 
-Also we [created cluster](https://kind.sigs.k8s.io/docs/user/ingress/#create-cluster) with letting know kind that we will require Ingress in the future.
+Also we [created cluster](https://kind.sigs.k8s.io/docs/user/ingress/#create-cluster) stating that we will need Ingress in the future.
 
 ## Fun finally
 
@@ -61,7 +61,7 @@ Let's try it!
 
 ## Under the hood
 
-Verify resources we've created using `kubectl get` command:
+Check resources we created using `kubectl get` command:
 - `kubectl get services`
 - `kubectl get pods`
 - `kubectl get ingress`
@@ -70,7 +70,7 @@ You can try also `kubectl describe \ logs` for moe information.
 
 ## After fun
 
-Delete the cluster and grab a beer!  
+Remove the cluster and grab a beer!  
 Good job today!    
 ```
 kind delete cluster --name kind
@@ -79,4 +79,4 @@ kind delete cluster --name kind
 # Conclusion
 
 First, we created a Kubernetes local cluster using command line, docker, kubectl and kind.  
-Last, we integrated the ingress controller and deployed a privately accessible service on the Kubernetes cluster.
+Last, we integrated the ingress controller and deployed privately accessible services on the Kubernetes cluster.
