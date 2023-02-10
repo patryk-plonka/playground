@@ -348,3 +348,10 @@ MigrationBackup/
 
 # Ionide (cross platform F# VS Code tools) working folder
 .ionide/
+
+# Terraform temporary, binary, state files or locks
+.terraform/
+.terraform.lock.hcl
+
+# Visual Studio settings
+.vscode/
