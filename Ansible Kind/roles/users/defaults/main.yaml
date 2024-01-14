@@ -1,0 +1,7 @@
+users:
+  - name: user1
+    password: password1
+    key: /path/to/user1/key.pub
+  - name: user2
+    password: password2
+    key: /path/to/user2/key.pub

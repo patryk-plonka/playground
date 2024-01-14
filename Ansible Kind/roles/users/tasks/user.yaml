@@ -1,0 +1,21 @@
+---
+- name: Generate random salt
+  set_fact:
+    password_salt: "{{ lookup('password', '/dev/null length=16 chars=ascii_letters') }}"
+
+- name: Create a user with sudo privileges
+  ansible.builtin.user:
+    name: "{{ user.name }}"
+    state: present
+    groups: sudo
+    append: true
+    create_home: true
+    shell: /bin/bash
+    password: "{{ user.password | password_hash('sha512', password_salt) }}"
+    update_password: on_create
+
+- name: Set authorized key for remote user
+  ansible.posix.authorized_key:
+    user: "{{ user.name }}"
+    state: present
+    key: "{{ lookup('file', user.key) }}"

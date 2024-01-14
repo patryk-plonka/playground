@@ -1,0 +1,5 @@
+---
+- name: Make sure NTP service is running
+  ansible.builtin.systemd:
+    state: started
+    name: systemd-timesyncd

@@ -1,0 +1,16 @@
+---
+- name: Server ongoing tasks
+  hosts: all
+  remote_user: "{{ initial_user }}"
+  become: true
+  vars:
+    ansible_become_pass: "{{ initial_user }}"
+  vars_files:
+  - vars/main.yaml
+
+  roles:
+    - update-packages
+    - kind-install
+    - kind-cluster
+
+

@@ -1,0 +1,24 @@
+---
+- name: Update apt cache
+  ansible.builtin.apt:
+    update_cache: yes
+
+- name: Install necessary packages
+  ansible.builtin.apt:
+    name: "{{ item }}"
+    state: present
+  loop: "{{ packages }}"
+
+- name: Download kind binary
+  get_url:
+    url: "https://kind.sigs.k8s.io/dl/{{ kind_version }}/kind-linux-amd64"
+    dest: "/usr/local/bin/kind"
+    mode: '0755'
+
+- name: Verify kind installation
+  command: kind version
+  register: kind_version_output
+  changed_when: false
+
+- debug:
+    var: kind_version_output.stdout_lines

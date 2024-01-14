@@ -1,0 +1,32 @@
+---
+- name: Copy cluster config template
+  template:
+    src: "{{ role_path }}/templates/cluster-config.yaml.j2"
+    dest: "/tmp/cluster-config.yaml"
+    mode: 0644
+
+- name: Get kind cluter name
+  shell: "kind get clusters"
+  register: cluster_name_output
+
+- name: Create kind cluster
+  shell: "kind create cluster --name {{ cluster_name }} --config /tmp/cluster-config.yaml"
+  when: "'kind' not in cluster_name_output.stdout"
+
+# - name: Verify kind cluster
+#   command: kubectl cluster-info
+#   environment:
+#     KUBECONFIG: "{{ kubeconfig_path }}"
+#   register: cluster_info_output
+#   changed_when: false
+
+# - debug:
+#     var: cluster_info_output.stdout_lines
+
+- name: Get and print Kubeconfig
+  command: "kind get kubeconfig"
+  register: kind_kubeconfig
+  changed_when: false
+
+- debug:
+    var: kind_kubeconfig.stdout_lines

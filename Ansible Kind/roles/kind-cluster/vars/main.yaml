@@ -1,0 +1,7 @@
+---
+cluster_name: kind
+
+control_nodes: 1
+worker_nodes: 2
+
+kubeconfig_path: "/path/to/kubeconfig"
