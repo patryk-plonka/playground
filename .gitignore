@@ -351,3 +351,8 @@ MigrationBackup/
 
 # Local VS Code settings
 .vscode
+
+# Ansible configs
+*/inventory/*.yaml
+*/inventory/*.yml
+*/ansible.cfg
