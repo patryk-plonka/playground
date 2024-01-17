@@ -1,0 +1,10 @@
+Edit profile script by invoking command `notepad $profile` 
+Reload profile script in the terminal using `$profile`
+More info about Powershell profiles https://learn.microsoft.com/en-us/powershell/module/microsoft.powershell.core/about/about_profiles?view=powershell-7.4 
+
+Copy oh-my-posh config to 'C:\Users\user\.oh-my-posh\config.json'
+More info about oh-my-posh https://ohmyposh.dev/
+
+Profile script uses Kubectl aliases prepared by ahmetb https://github.com/ahmetb/kubectl-aliases
+
+Use Windows Terminal https://github.com/microsoft/terminal instead of other default terminals, highly recommended :)
