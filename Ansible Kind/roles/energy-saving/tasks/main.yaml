@@ -1,0 +1,7 @@
+---
+- name: Schedule shutdown at 8 PM everyday
+  cron:
+    name: "server shutdown job"
+    minute: "0"
+    hour: "20"
+    job: "/sbin/shutdown -h now"

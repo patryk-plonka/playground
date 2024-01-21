@@ -12,5 +12,6 @@
     - update-packages
     - kind-install
     - kind-cluster
+    - energy-saving
 
 
