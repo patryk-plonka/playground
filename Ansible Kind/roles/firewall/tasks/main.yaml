@@ -1,0 +1,21 @@
+---
+- name: Install ufw
+  apt:
+    name: ufw
+    state: present
+
+- name: Enable ufw
+  community.general.ufw:
+    state: enabled
+
+- name: Allow ssh through ufw
+  community.general.ufw:
+    rule: allow
+    port: '22'
+    proto: tcp
+
+- name: Allow kubectl through ufw
+  community.general.ufw:
+    rule: allow
+    port: '6443'
+    proto: tcp
