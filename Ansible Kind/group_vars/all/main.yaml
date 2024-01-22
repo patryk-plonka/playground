@@ -1,7 +1,5 @@
 # Specify the user you want to create here. The same user 
 # will be created on all the hosts.
-create_user: pp
-create_ansible_user: ansible
 initial_user: patryk
 
 # SSH port
@@ -11,5 +9,15 @@ ssh_port: 22
 # to copy over to the target hosts. If the name of your local machine's
 # SSH public key fingerprint file is not `id_rsa.pub`, you'll have
 # to change it here.
-copy_local_key: "{{ lookup('file', lookup('env','HOME') + '/.ssh/id_ed25519.pub') }}"
-copy_ansible_key: "{{ lookup('file', lookup('env','HOME') + '/.ssh/id_ansible.pub') }}"
+users:
+  - name: pp
+    password: patryk
+    key: ~/.ssh/id_ed25519.pub
+  - name: ansible
+    password: ansible
+    key:  ~/.ssh/id_ansible.pub
+
+# Set energy saving shutdown cron job
+energySaving:
+  scheduledShutdownHour: "19"
+  scheduledShutdownMinute: "0"

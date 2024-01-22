@@ -1,80 +1,30 @@
-# ---
-# - name: Make sure we have a 'sudo' group
-#   ansible.builtin.group:
-#     name: sudo
-#     state: present
-
-# - name: Create a user with sudo privileges
-#   ansible.builtin.user:
-#     name: "{{ create_user }}"
-#     state: present
-#     groups: sudo
-#     append: true
-#     create_home: true
-#     shell: /bin/bash
-#     password: "{{ password | password_hash('sha512', password_salt) }}"
-#     update_password: on_create
-
-# - name: Set authorized key for remote user
-#   ansible.posix.authorized_key:
-#     user: "{{ create_user }}"
-#     state: present
-#     key: "{{ copy_local_key }}"
-
-# - name: Create a user with sudo privileges
-#   ansible.builtin.user:
-#     name: "{{ create_ansible_user }}"
-#     state: present
-#     groups: sudo
-#     append: true
-#     create_home: true
-#     shell: /bin/bash
-#     password: "{{ password | password_hash('sha512', password_salt) }}"
-#     update_password: on_create
-
-# - name: Set authorized key for remote user
-#   ansible.posix.authorized_key:
-#     user: "{{ create_ansible_user }}"
-#     state: present
-#     key: "{{ copy_ansible_key }}"
-
-
-# ---
-# - name: Make sure we have a 'sudo' group
-#   ansible.builtin.group:
-#     name: sudo
-#     state: present
-
-# - name: Create users with sudo privileges and set authorized keys
-#   loop: "{{ users }}"
-#   loop_control:
-#     loop_var: 
-#   block:
-#     - name: Create a user with sudo privileges
-#       ansible.builtin.user:
-#         name: "{{ user.name }}"
-#         state: present
-#         groups: sudo
-#         append: true
-#         create_home: true
-#         shell: /bin/bash
-#         password: "{{ user.password | password_hash('sha512', password_salt) }}"
-#         update_password: on_create
-
-#     - name: Set authorized key for remote user
-#       ansible.posix.authorized_key:
-#         user: "{{ user.name }}"
-#         state: present
-#         key: "{{ lookup('file', user.key) }}"
-
 ---
 - name: Make sure we have a 'sudo' group
   ansible.builtin.group:
     name: sudo
     state: present
+  tags: users
+
+- name: Setup passwordless sudo
+  lineinfile:
+    path: /etc/sudoers
+    state: present
+    regexp: '^%sudo'
+    line: '%sudo ALL=(ALL) NOPASSWD: ALL'
+    validate: '/usr/sbin/visudo -cf %s'
+  tags: users
 
 - name: Create users with sudo privileges and set authorized keys
   include_tasks: user.yaml
   loop: "{{ users }}"
   loop_control:
     loop_var: user
+  tags: users
+
+# - name: Disable password authentication for root
+#   lineinfile:
+#     path: /etc/ssh/sshd_config
+#     state: present
+#     regexp: '^#?PermitRootLogin'
+#     line: 'PermitRootLogin prohibit-password'
+  # tags: users

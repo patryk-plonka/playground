@@ -1,7 +1,7 @@
 users:
   - name: user1
     password: password1
-    key: /path/to/user1/key.pub
-  - name: user2
+    key: ~/.ssh/id_rsa.pub
+  - name: ansible
     password: password2
-    key: /path/to/user2/key.pub
+    key: ~/.ssh/id_rsa.pub

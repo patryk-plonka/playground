@@ -356,3 +356,12 @@ MigrationBackup/
 */inventory/*.yaml
 */inventory/*.yml
 */ansible.cfg
+
+# Ansible-vault password file
+*/vpass
+*/.vpass
+
+*/venv
+*/.venv
+
+*/roles/external

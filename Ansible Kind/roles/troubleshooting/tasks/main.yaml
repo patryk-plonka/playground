@@ -2,17 +2,21 @@
   apt:
     name: net-tools
     state: present
+  tags: tools
 
 - name: Download kubectl
   get_url:
-    url: https://storage.googleapis.com/kubernetes-release/release/v1.22.0/bin/linux/amd64/kubectl
+    url: https://storage.googleapis.com/kubernetes-release/release/{{ kubectl_version }}/bin/linux/amd64/kubectl
     dest: /usr/local/bin/kubectl
     mode: '0755'
+  tags: tools
 
 - name: Verify kubectl is working
   command: kubectl version --client
   register: result
   changed_when: false
+  tags: tools
 
 - debug:
     var: result.stdout_lines
+  tags: tools

@@ -6,7 +6,7 @@
   vars:
     ansible_become_pass: "{{ initial_user }}"
   vars_files:
-  - vars/main.yaml
+    - group_vars/all/main.yaml
 
   roles:
     - update-packages

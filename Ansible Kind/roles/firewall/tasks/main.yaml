@@ -6,16 +6,17 @@
 
 - name: Enable ufw
   community.general.ufw:
-    state: enabled
+    state: "{{ firewallState }}"
+    default: deny
 
 - name: Allow ssh through ufw
   community.general.ufw:
     rule: allow
-    port: '22'
+    port: "{{ sshPort }}"
     proto: tcp
 
 - name: Allow kubectl through ufw
   community.general.ufw:
     rule: allow
-    port: '6443'
+    port: "{{ kubernetesApiPort }}"
     proto: tcp

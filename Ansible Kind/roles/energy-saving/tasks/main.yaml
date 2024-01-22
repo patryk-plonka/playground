@@ -1,7 +1,8 @@
 ---
-- name: Schedule shutdown at 8 PM everyday
+- name: Schedule shutdown everyday
   cron:
     name: "server shutdown job"
-    minute: "0"
-    hour: "20"
+    minute: "{{ energySaving.scheduledShutdownMinute }}"
+    hour: "{{ energySaving.scheduledShutdownHour  }}"
     job: "/sbin/shutdown -h now"
+  tags: energy-saving

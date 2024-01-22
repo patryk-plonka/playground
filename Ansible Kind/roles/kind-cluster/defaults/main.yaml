@@ -6,4 +6,4 @@ cluster_port: 6443
 control_nodes: 1
 worker_nodes: 2
 
-kubeconfig_path: "/path/to/kubeconfig"
+# kubeconfig_path: "/path/to/kubeconfig"

@@ -3,3 +3,4 @@
   ansible.builtin.systemd:
     state: started
     name: systemd-timesyncd
+  tags: ntp
