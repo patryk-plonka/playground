@@ -1,10 +1,10 @@
 ---
 - name: Server ongoing tasks
   hosts: all
-  remote_user: "{{ initial_user }}"
+  remote_user: "{{ (users | selectattr('name', 'equalto', 'ansible') | list | first).name }}"
   become: true
   vars:
-    ansible_become_pass: "{{ initial_user }}"
+    ansible_ssh_private_key_file: "{{ (users | selectattr('name', 'equalto', 'ansible') | list | first).key }}"
   vars_files:
     - group_vars/all/main.yaml
 

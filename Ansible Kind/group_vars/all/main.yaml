@@ -1,6 +1,7 @@
 # Specify the user you want to create here. The same user 
 # will be created on all the hosts.
 initial_user: patryk
+initial_password: change-me
 
 # SSH port
 ssh_port: 22
@@ -11,10 +12,10 @@ ssh_port: 22
 # to change it here.
 users:
   - name: pp
-    password: patryk
+    # password: patryk
     key: ~/.ssh/id_ed25519.pub
   - name: ansible
-    password: ansible
+    # password: ansible
     key:  ~/.ssh/id_ansible.pub
 
 # Set energy saving shutdown cron job

@@ -4,7 +4,7 @@
   remote_user: "{{ initial_user }}"
   become: true
   vars:
-    ansible_become_pass: "{{ initial_user }}"
+    ansible_become_pass: "{{ initial_password }}"
   vars_files:
     - group_vars/all/main.yaml
 
