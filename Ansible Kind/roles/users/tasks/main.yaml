@@ -1,0 +1,30 @@
+---
+- name: Make sure we have a 'sudo' group
+  ansible.builtin.group:
+    name: sudo
+    state: present
+  tags: users
+
+- name: Setup passwordless sudo
+  lineinfile:
+    path: /etc/sudoers
+    state: present
+    regexp: '^%sudo'
+    line: '%sudo ALL=(ALL) NOPASSWD: ALL'
+    validate: '/usr/sbin/visudo -cf %s'
+  tags: users
+
+- name: Create users with sudo privileges and set authorized keys
+  include_tasks: user.yaml
+  loop: "{{ users }}"
+  loop_control:
+    loop_var: user
+  tags: users
+
+# - name: Disable password authentication for root
+#   lineinfile:
+#     path: /etc/ssh/sshd_config
+#     state: present
+#     regexp: '^#?PermitRootLogin'
+#     line: 'PermitRootLogin prohibit-password'
+  # tags: users

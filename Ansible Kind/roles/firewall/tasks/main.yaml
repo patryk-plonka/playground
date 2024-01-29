@@ -1,0 +1,22 @@
+---
+- name: Install ufw
+  apt:
+    name: ufw
+    state: present
+
+- name: Enable ufw
+  community.general.ufw:
+    state: "{{ firewallState }}"
+    default: deny
+
+- name: Allow ssh through ufw
+  community.general.ufw:
+    rule: allow
+    port: "{{ sshPort }}"
+    proto: tcp
+
+- name: Allow kubectl through ufw
+  community.general.ufw:
+    rule: allow
+    port: "{{ kubernetesApiPort }}"
+    proto: tcp

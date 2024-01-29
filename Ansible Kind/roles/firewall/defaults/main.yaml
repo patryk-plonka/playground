@@ -1,0 +1,4 @@
+---
+firewallState: enabled
+sshPort: "22"
+kubernetesApiPort: "6443"

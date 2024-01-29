@@ -1,0 +1,13 @@
+---
+kind_packages:
+  - docker.io
+  - curl
+  - ca-certificates
+  - curl
+  - gnupg
+  - lsb-release
+  # - kubectl
+  # - docker-ce
+  # - docker-ce-cli
+  # - containerd.io
+kind_version: v0.20.0

@@ -1,0 +1,16 @@
+---
+- name: Initial server setup tasks
+  hosts: all
+  remote_user: "{{ initial_user }}"
+  become: true
+  vars:
+    ansible_become_pass: "{{ initial_password }}"
+  vars_files:
+    - group_vars/all/main.yaml
+
+  roles:
+    - update-packages
+    - ntp
+    - users
+    - firewall
+    - troubleshooting

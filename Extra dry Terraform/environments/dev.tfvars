@@ -14,14 +14,14 @@ general = {
     "OpsTeam"            = "Cloud operations"    # other options: Central IT, Cloud operations, ControlCharts team, MSP-{Managed Service Provider name}
     # optional
     "ApplicationName" = "Sample"
-    "Approver"        = "patryk.plonka@gmail.com"
+    "Approver"        = "someone@example.com"
     "BudgetAmount"    = "$50"
     "CostCenter"      = "1"
     "DR"              = "Essential" # other options: Mission-critical, Critical, Essential
     "EndDate"         = "2023-12-31"
     "Env"             = "Dev" # other options: Prod, Dev, QA, Stage, Test
-    "Owner"           = "patryk.plonka@gmail.com"
-    "Requester"       = "patryk.plonka@gmail.com"
+    "Owner"           = "someone@example.com"
+    "Requester"       = "someone@example.com"
     "ServiceClass"    = "Dev" # other options: Dev, Bronze, Silver, Gold
     "StartDate"       = "2023-01-01"
   }

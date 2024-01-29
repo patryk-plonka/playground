@@ -1,0 +1,68 @@
+---
+- name: Get IP address
+  set_fact:
+    cluster_ip: "{{ hostvars[inventory_hostname]['ansible_default_ipv4']['address'] }}"
+  tags: 
+    - kind
+    - cluster
+    - cluster-create
+
+- name: Display IP address
+  debug:
+    var: cluster_ip
+  tags: 
+    - kind
+    - cluster
+    - cluster-create
+
+- name: Copy cluster config template
+  template:
+    src: "{{ role_path }}/templates/cluster-config.yaml.j2"
+    dest: "/tmp/cluster-config.yaml"
+    mode: 0644
+  tags: 
+    - kind
+    - cluster
+    - cluster-create
+
+- name: Get kind cluter name
+  shell: "kind get clusters"
+  register: cluster_name_output
+  tags: 
+    - kind
+    - cluster
+    - cluster-create
+
+- name: Create kind cluster
+  shell: "kind create cluster --name {{ cluster_name }} --config /tmp/cluster-config.yaml"
+  when: "'kind' not in cluster_name_output.stdout"
+  tags: 
+    - kind
+    - cluster
+    - cluster-create
+
+# - name: Verify kind cluster
+#   command: kubectl cluster-info
+#   environment:
+#     KUBECONFIG: "{{ kubeconfig_path }}"
+#   register: cluster_info_output
+#   changed_when: false
+
+# - debug:
+#     var: cluster_info_output.stdout_lines
+
+- name: Get and print Kubeconfig
+  command: "kind get kubeconfig"
+  register: kind_kubeconfig
+  changed_when: false
+  tags: 
+    - kind
+    - cluster
+    - cluster-create
+
+- debug:
+    var: kind_kubeconfig.stdout_lines
+  tags: 
+    - kind
+    - cluster
+    - cluster-create

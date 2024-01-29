@@ -348,3 +348,20 @@ MigrationBackup/
 
 # Ionide (cross platform F# VS Code tools) working folder
 .ionide/
+
+# Local VS Code settings
+.vscode
+
+# Ansible configs
+*/inventory/*.yaml
+*/inventory/*.yml
+*/ansible.cfg
+
+# Ansible-vault password file
+*/vpass
+*/.vpass
+
+*/venv
+*/.venv
+
+*/roles/external

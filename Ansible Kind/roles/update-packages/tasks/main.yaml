@@ -1,0 +1,11 @@
+---
+- name: update cache
+  ansible.builtin.apt:
+    update_cache: yes
+  tags: apt
+
+- name: Update all installed packages
+  ansible.builtin.apt:
+    name: "*"
+    state: latest
+  tags: apt
