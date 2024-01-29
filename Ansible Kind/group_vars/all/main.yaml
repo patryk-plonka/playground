@@ -1,6 +1,6 @@
 # Specify the user you want to create here. The same user 
 # will be created on all the hosts.
-initial_user: patryk
+initial_user: user
 initial_password: change-me
 
 # SSH port
@@ -11,11 +11,9 @@ ssh_port: 22
 # SSH public key fingerprint file is not `id_rsa.pub`, you'll have
 # to change it here.
 users:
-  - name: pp
-    # password: patryk
+  - name: admin
     key: ~/.ssh/id_ed25519.pub
   - name: ansible
-    # password: ansible
     key:  ~/.ssh/id_ansible.pub
 
 # Set energy saving shutdown cron job
