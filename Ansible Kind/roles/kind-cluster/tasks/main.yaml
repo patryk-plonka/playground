@@ -1,4 +1,20 @@
 ---
+- name: Get IP address
+  set_fact:
+    cluster_ip: "{{ hostvars[inventory_hostname]['ansible_default_ipv4']['address'] }}"
+  tags: 
+    - kind
+    - cluster
+    - cluster-create
+
+- name: Display IP address
+  debug:
+    var: cluster_ip
+  tags: 
+    - kind
+    - cluster
+    - cluster-create
+
 - name: Copy cluster config template
   template:
     src: "{{ role_path }}/templates/cluster-config.yaml.j2"

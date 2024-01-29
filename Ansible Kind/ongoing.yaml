@@ -1,6 +1,7 @@
 ---
 - name: Server ongoing tasks
   hosts: all
+  gather_facts: yes
   remote_user: "{{ (users | selectattr('name', 'equalto', 'ansible') | list | first).name }}"
   become: true
   vars:
